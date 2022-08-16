@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+</head>
+<body>
+  <h1>Ask a question</h1>
+  <form action="/questions" method="post">
+    <div class="mb-3 w-25">
+      <label for="userIdInput" class="form-label">User ID</label>
+      <input name="user_id" type="text" class="form-control" id="userIdInput">
+    </div>
+    <div class="mb-3 w-25">
+      <label for="topicInput" class="form-label">Topic</label>
+      <input name="topic" type="text" class="form-control" id="topicInput">
+    </div>
+    <div class="mb-3">
+      <label for="titleInput" class="form-label">Question</label>
+      <input name="title" type="text" class="form-control" id="titleInput">
+    </div>
+    <div class="mb-3">
+      <label for="bodyInput" class="form-label">Details</label>
+    <textarea name="body" id="bodyInput" class="form-control" rows="3"></textarea>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+  <footer>
+    <%- include('../partials/footer') %>
+  </footer>
+</body>
+</html>
+

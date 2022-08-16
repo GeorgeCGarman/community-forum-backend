@@ -2,18 +2,20 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require("dotenv")
-const middleware = require('./middleware/index');
+const middleware = require('./middleware/index')
+const ejs = require('ejs')
+const bodyParser = require('body-parser')
 
-const userRouter = require("./routes/userRoutes")
-const ideaRouter = require("./routes/ideaRoutes")
+const questionRouter = require("./routes/questionRoutes")
 
 const app = express()
 dotenv.config()
 //use this for Production
 // const mongoURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`
 //local
-// MONGO_URL=`mongodb://localhost:27017/dbname`
-const mongoURL = process.env.MONGO_URL
+// MONGO_URL=``
+// const mongoURL = process.env.MONGO_URL
+const mongoURL = `mongodb://localhost:27017/forum-db`
 const connectWithRetry = () =>{
 mongoose
     .connect(mongoURL)
@@ -28,18 +30,16 @@ connectWithRetry()
 app.enable("trust proxy");
 app.use(cors({}))
 app.use(express.json())
+app.set('view engine', 'ejs')
+app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: false }))
+
 //Middleware
 // app.use(middleware.decodeToken);
 
-app.use("/user", userRouter)
-app.use("/ideabrekrr", ideaRouter)
+app.use("/questions", questionRouter)
 
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, ()=> console.log(`Listening on port ${port}`))
-
-
-//Todo:
-//add error loggers 
-//add analytics
