@@ -7,6 +7,8 @@ const ejs = require('ejs')
 const bodyParser = require('body-parser')
 
 const questionRouter = require("./routes/questionRoutes")
+const commentRouter = require("./routes/commentRoutes")
+const upvoteRouter = require("./routes/upvoteRouter")
 
 const app = express()
 dotenv.config()
@@ -38,6 +40,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // app.use(middleware.decodeToken);
 
 app.use("/questions", questionRouter)
+app.use("/comments", commentRouter)
+app.use("/upvotes", upvoteRouter)
 
 
 const port = process.env.PORT || 3000;

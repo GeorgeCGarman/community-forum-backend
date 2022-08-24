@@ -5,8 +5,9 @@ const questionSchema = new mongoose.Schema({
   date_created: {type: Date, default: Date.now()},
   topic: {type: String, required: true},
   title: {type: String, required: true},
+  last_modified: {type: Date, default: Date.now()},
   body: {type: String},
-  upvotes: {type: Number},
+  views: {type: Number}
 })
 
 const Question = mongoose.model("Question", questionSchema)
