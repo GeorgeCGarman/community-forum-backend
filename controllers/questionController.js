@@ -20,18 +20,16 @@ const getQuestion = async(req, res) => {
     var questions
     if (question_id) { // Correct way?
       questions = await Question.find({_id: question_id})
-      await Question.find({_id: question_id})
+      newQuestion = questions[0]
+      if (newQuestion.views) newQuestion.views = parseInt(newQuestion.views) + 1
+      else newQuestion.views = 1
+      await newQuestion.save()
     } else if (topic) {
       questions = await Question.find({topic: topic})
     } else {
       questions = await Question.find()
     }
-    questions.forEach(async question => {
-      const newQuestion = question
-      if (newQuestion.views) newQuestion.views = parseInt(newQuestion.views) + 1
-      else newQuestion.views = 1
-      await newQuestion.save()
-    })
+    
     if (!questions) return res.status(404).json({status: "fail", msg: "Question not found"})
     res.status(200).json(questions)
   } catch (e) {
