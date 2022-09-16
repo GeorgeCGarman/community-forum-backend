@@ -1,4 +1,4 @@
-# community-forum backend
+# community-forum-backend
 
 This is a backend for the community forum project, where users can create questions and leave comments, and also upvote these comments.
 
